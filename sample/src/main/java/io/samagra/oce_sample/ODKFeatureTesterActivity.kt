@@ -96,11 +96,6 @@ class ODKFeatureTesterActivity : AppCompatActivity(), View.OnClickListener {
         clearAllFormsButton.setOnClickListener(this)
         showAllForms.setOnClickListener(this)
         openSavedButton.setOnClickListener(this)
-        Timber.tag("googleServicesFilePresent").i("Hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
-        val rootDir = applicationContext.filesDir.parentFile
-        val files = rootDir.list()
-        val googleServicesFilePresent = files.contains("google-services.json")
-        Timber.tag("googleServicesFilePresent").i("$googleServicesFilePresent")
         setListeners()
     }
 
