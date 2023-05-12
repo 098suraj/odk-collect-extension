@@ -68,6 +68,9 @@ class ODKFeatureTesterActivity : AppCompatActivity(), View.OnClickListener {
         ODKProvider.init(application)
         odkInteractor = ODKProvider.getOdkInteractor()
         progressBar.visibility = View.VISIBLE
+        downloadFormsButton.isEnabled=false
+        downloadAllFormsButton.isEnabled=false
+        clearAllFormsButton.isEnabled=false
         odkInteractor.setupODK(IOUtils.toString(resources.openRawResource(R.raw.settings)), false, object :
             ODKProcessListener {
             override fun onProcessComplete() {
@@ -76,6 +79,9 @@ class ODKFeatureTesterActivity : AppCompatActivity(), View.OnClickListener {
                 formsDatabaseInteractor = ODKProvider.getFormsDatabaseInteractor()
                 networkInteractor = ODKProvider.getFormsNetworkInteractor()
                 progressBar.visibility = View.INVISIBLE
+                downloadFormsButton.isEnabled=true
+                clearAllFormsButton.isEnabled=true
+                downloadAllFormsButton.isEnabled=true
             }
             override fun onProcessingError(exception: Exception) {
                 exception.printStackTrace()
@@ -90,7 +96,11 @@ class ODKFeatureTesterActivity : AppCompatActivity(), View.OnClickListener {
         clearAllFormsButton.setOnClickListener(this)
         showAllForms.setOnClickListener(this)
         openSavedButton.setOnClickListener(this)
-
+        Timber.tag("googleServicesFilePresent").i("Hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
+        val rootDir = applicationContext.filesDir.parentFile
+        val files = rootDir.list()
+        val googleServicesFilePresent = files.contains("google-services.json")
+        Timber.tag("googleServicesFilePresent").i("$googleServicesFilePresent")
         setListeners()
     }
 
